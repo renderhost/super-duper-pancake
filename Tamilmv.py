@@ -98,12 +98,13 @@ def begin():
 
     tree = ET.ElementTree(rss)
     tree.write('tamilmvRSS.xml', encoding='utf-8', xml_declaration=True)
-    print('write finished')
+    print('Begined finished')
 
 def job():
     global all_links
     if not len(all_links):
         all_links=load_list_from_file()
+        print(len(all_links))
     url = 'https://www.1tamilmv.eu/'
 
     # Lets use the requests get method to fetch the data from url
@@ -171,6 +172,12 @@ def serve_rss():
 @app.route('/start')
 def start():
     return 'Started'
+@app.route('/reset')
+def something():
+    begin()
+@app.route('/job')
+def something2():
+    job()
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
