@@ -164,7 +164,7 @@ def serve_rss():
 
 @app.route('/hello')
 def helo():
-    return "helooo world"
+    return Response("helooo world")
     
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
