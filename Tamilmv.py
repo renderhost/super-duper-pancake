@@ -150,14 +150,15 @@ def job():
 # begin()
 # job()
 
+begin()
 from threading import Thread
-
 def run_schedule():
     while True:
         schedule.run_pending()
         sleep(1)
 
 schedule.every(25).minutes.do(job)
+Thread(run_schedule).start()
 
 
 
@@ -165,7 +166,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def serve_rss():
-    return send_file('rss.xml')
+    return send_file('tamilmvRSS.xml')
 @app.route('/start')
 def start():
     return 'Started'
