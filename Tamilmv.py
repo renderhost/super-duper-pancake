@@ -12,18 +12,7 @@ from flask import Flask, send_file
 import os
 
 
-app = Flask(__name__)
 
-@app.route('/')
-def serve_rss():
-    return send_file('tamilmvRSS.xml')
-@app.route('/start')
-def start():
-    return 'Started'
-
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8000))
-    app.run(port=port,debug=True)
 
 # Save a list to a file
 def save_list_to_file(list_to_save):
@@ -174,6 +163,18 @@ def run_schedule():
 schedule.every(25).minutes.do(job)
 Thread(target=run_schedule).start()
 
+app = Flask(__name__)
+
+@app.route('/')
+def serve_rss():
+    return send_file('tamilmvRSS.xml')
+@app.route('/start')
+def start():
+    return 'Started'
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8000))
+    app.run(port=port,host='0.0.0.0')
 
 
 
