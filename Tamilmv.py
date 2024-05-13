@@ -8,7 +8,7 @@ from time import sleep
 import concurrent.futures
 import pickle
 import schedule
-from flask import Flask, send_from_directory
+from flask import Flask, send_file
 import os
 
 # Save a list to a file
@@ -147,28 +147,32 @@ def job():
     # tree.write('tamilmvRSS.xml', encoding='utf-8', xml_declaration=True)
 
 
-begin()
-job()
+# begin()
+# job()
+
+from threading import Thread
+
+def run_schedule():
+    while True:
+        schedule.run_pending()
+        sleep(1)
 
 schedule.every(25).minutes.do(job)
-while True:
-    schedule.run_pending()
-    sleep(1)
+
 
 
 app = Flask(__name__)
 
 @app.route('/')
 def serve_rss():
-    return send_from_directory(directory='.', filename='rss.xml')
+    return send_file('rss.xml')
+@app.route('/start')
+def start():
+    return 'Started'
 
-@app.route('/hello')
-def helo():
-    return Response("helooo world")
-    
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
-    app.run(host='0.0.0.0',port=port)
+    app.run(port=port,debug=True)
 
 # torrent_file_path = "test1.torrent"
 # size_in_bytes = get_torrent_size(torrent_file_path)
