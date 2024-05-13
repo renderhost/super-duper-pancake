@@ -162,6 +162,10 @@ app = Flask(__name__)
 def serve_rss():
     return send_from_directory(directory='.', filename='rss.xml')
 
+@app.route('/hello')
+def helo():
+    return "helooo world"
+    
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.run(port=port)
