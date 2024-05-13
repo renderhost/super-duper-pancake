@@ -20,3 +20,4 @@ torrent-parser==0.4.1
 urllib3==2.2.1
 Werkzeug==3.0.3
 yarl==1.9.4
+schedule
