@@ -140,8 +140,6 @@ def job():
             ET.SubElement(item, 'link').text = item_data[1]
             ET.SubElement(item, 'pubDate').text = npw
             channel.insert(3, item)
-
-
         tree.write('tamilmvRSS.xml', encoding='utf-8', xml_declaration=True)
 
 
