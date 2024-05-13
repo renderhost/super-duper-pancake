@@ -168,7 +168,7 @@ def helo():
     
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
-    app.run(port=port)
+    app.run(host='0.0.0.0',port=port)
 
 # torrent_file_path = "test1.torrent"
 # size_in_bytes = get_torrent_size(torrent_file_path)
