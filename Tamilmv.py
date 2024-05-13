@@ -11,6 +11,20 @@ import schedule
 from flask import Flask, send_file
 import os
 
+
+app = Flask(__name__)
+
+@app.route('/')
+def serve_rss():
+    return send_file('tamilmvRSS.xml')
+@app.route('/start')
+def start():
+    return 'Started'
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8000))
+    app.run(port=port,debug=True)
+
 # Save a list to a file
 def save_list_to_file(list_to_save):
     with open('rssList', 'wb') as f:
@@ -158,22 +172,11 @@ def run_schedule():
         sleep(1)
 
 schedule.every(25).minutes.do(job)
-Thread(run_schedule).start()
+Thread(target=run_schedule).start()
 
 
 
-app = Flask(__name__)
 
-@app.route('/')
-def serve_rss():
-    return send_file('tamilmvRSS.xml')
-@app.route('/start')
-def start():
-    return 'Started'
-
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8000))
-    app.run(port=port,debug=True)
 
 # torrent_file_path = "test1.torrent"
 # size_in_bytes = get_torrent_size(torrent_file_path)
