@@ -53,7 +53,6 @@ def scrape(links):
             # Yield results from each completed task
             for a in result:
                 yield a.text, a['href']
-    del links
 
 
 def build_xml(data,channel):
@@ -64,7 +63,6 @@ def build_xml(data,channel):
         ET.SubElement(item, 'link').text = x[1]
         # ET.SubElement(item, 'description').text = 'wDbots'
         ET.SubElement(item, 'pubDate').text = now.isoformat('T')
-    del data
 
 all_links = []
 
